@@ -1,5 +1,5 @@
 from flask import Flask
-from .Routes import NewSuppliersRoute
+from .Routes import CreateSuppliersRoute, GetSuppliersRoute
 from .Utils.Database import db
 from dotenv import load_dotenv
 from os import environ
@@ -26,6 +26,7 @@ def init_app(config):
     app.config['WTF_CSRF_ENABLED'] = False # Desactivamos la proteción CRSF para simplificar la prueba de la API
 
     # Registramos todas las rutas
-    app.register_blueprint(NewSuppliersRoute.main, url_prefix='/')
+    app.register_blueprint(CreateSuppliersRoute.main, url_prefix='/')
+    app.register_blueprint(GetSuppliersRoute.main, url_prefix='/')
 
     return app # Retonarmos la aplicación inicializada
