@@ -1,5 +1,5 @@
 from flask import Flask
-from .Routes import IndexRoute
+from .Routes import NewSuppliersRoute
 from .Utils.Database import db
 from dotenv import load_dotenv
 from os import environ
@@ -24,6 +24,6 @@ def init_app(config):
     db.init_app(app) # Inicializamos la base de datos con la aplicación
 
     # Registramos todas las rutas
-    app.register_blueprint(IndexRoute.main, url_prefix='/')
+    app.register_blueprint(NewSuppliersRoute.main, url_prefix='/')
 
     return app # Retonarmos la aplicación inicializada
