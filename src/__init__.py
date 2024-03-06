@@ -23,6 +23,8 @@ def init_app(config):
 
     db.init_app(app) # Inicializamos la base de datos con la aplicación
 
+    app.config['WTF_CSRF_ENABLED'] = False # Desactivamos la proteción CRSF para simplificar la prueba de la API
+
     # Registramos todas las rutas
     app.register_blueprint(NewSuppliersRoute.main, url_prefix='/')
 

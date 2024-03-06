@@ -1,6 +1,9 @@
 from flask import Blueprint, jsonify, request
+from src.Auth.ValidateSupplierData import SupplierForm
 from src.Models.SuppliersModel import Supplier
 from src.Utils.Database import db
+from src.Utils.Logger import Logger
+import traceback
 
 
 main = Blueprint('newSupplier', __name__)
@@ -9,19 +12,27 @@ main = Blueprint('newSupplier', __name__)
 # Ruta encargada de la creación de nuevos proveedores
 @main.post('api/supplier')
 def supplier():
-    # Obtener los datos en formato JSON
-    data = request.get_json()
+    try:
+        data = request.get_json()
 
-    # Guardar cada uno de los datos en variables
-    name = data['name']
-    address = data['address']
-    contact = data['contact']
+        form = SupplierForm(data=data)
 
-    with db.session() as session:
-        # Guardar el nuevo provedor en la base de datos
-        new_supplier = Supplier(name, address, contact)
-        session.add(new_supplier)
-        session.commit()
+        if form.validate():
+            name = form.name.data
+            address = form.address.data
+            contact = form.contact.data
 
-    # Retornar mensaje de sastifación
-    return jsonify({"message": "Supplier created successfully"}), 200
+            with db.session() as session:
+                new_supplier = Supplier(name, address, contact)
+                session.add(new_supplier)
+                session.commit()
+
+            return jsonify({"message": "Supplier created successfully"}), 200
+        else:
+            errors = form.errors
+            return jsonify({"message": "Validation error", "errors": errors}), 400
+
+    except Exception as ex:
+        Logger.add_to_log('error', str(ex))
+        Logger.add_to_log('error', traceback.format_exc())
+        return jsonify({"message": "Error creating supplier. Please try again later"}), 500
