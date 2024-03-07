@@ -7,6 +7,7 @@ import traceback
 
 main = Blueprint('getSuppliers', __name__)
 
+
 # Ruta encargada de obtener todos los proveedores
 @main.get('api/suppliers')
 def get_suppliers():
