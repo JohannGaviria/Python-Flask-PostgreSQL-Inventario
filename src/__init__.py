@@ -1,5 +1,7 @@
 from flask import Flask
-from .Routes.SuppliersRoutes import CreateSupplierRoute, GetSuppliersRoute, UpdateSupplierRoute, GetSupplierRoute, DeleteSupplierRoute
+from .Routes.SuppliersRoutes import CreateSupplierRoute, GetSupplierRoute, GetSuppliersRoute, UpdateSupplierRoute, DeleteSupplierRoute
+from .Routes.ProductsRoutes import CreateProductRoute, GetProductRoute, GetProductsRoute, UpdateProductRoute, DeleteProductRoute
+from .Routes.ProductCategoriesRoutes import CreateProductCategorieRoute, GetProductCategoriesRoute, GetProductCategorieRoute, UpdateProductCategorieRoute, DeleteProductCategorieRoute
 from .Utils.Database import db
 from dotenv import load_dotenv
 from os import environ
@@ -31,5 +33,17 @@ def init_app(config):
     app.register_blueprint(UpdateSupplierRoute.main, url_prefix='/')
     app.register_blueprint(GetSupplierRoute.main, url_prefix='/')
     app.register_blueprint(DeleteSupplierRoute.main, url_prefix='/')
+
+    app.register_blueprint(CreateProductRoute.main, url_prefix='/')
+    app.register_blueprint(GetProductsRoute.main, url_prefix='/')
+    app.register_blueprint(GetProductRoute.main, url_prefix='/')
+    app.register_blueprint(UpdateProductRoute.main, url_prefix='/')
+    app.register_blueprint(DeleteProductRoute.main, url_prefix='/')
+
+    app.register_blueprint(CreateProductCategorieRoute.main, url_prefix='/')
+    app.register_blueprint(GetProductCategoriesRoute.main, url_prefix='/')
+    app.register_blueprint(GetProductCategorieRoute.main, url_prefix='/')
+    app.register_blueprint(UpdateProductCategorieRoute.main, url_prefix='/')
+    app.register_blueprint(DeleteProductCategorieRoute.main, url_prefix='/')
 
     return app # Retonarmos la aplicación inicializada
