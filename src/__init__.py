@@ -3,6 +3,7 @@ from .Routes.SuppliersRoutes import CreateSupplierRoute, GetSupplierRoute, GetSu
 from .Routes.ProductsRoutes import CreateProductRoute, GetProductRoute, GetProductsRoute, UpdateProductRoute, DeleteProductRoute
 from .Routes.ProductCategoriesRoutes import CreateProductCategorieRoute, GetProductCategoriesRoute, GetProductCategorieRoute, UpdateProductCategorieRoute, DeleteProductCategorieRoute
 from .Routes.MovementTypesRoutes import CreateMovementTypeRoute, GetMovementTypesRoute, GetMovementTypeRoute, DeleteMovementTypeRoute, UpdateMovementTypeRoute
+from .Routes.InventoryMovementsRoutes import CreateInventoryMovementRoute, GetInventoryMovementsRoute, GetInventoryMovementRoute, DeleteInventoryMovementRoute, UpdateInventoryMovementRoute
 from .Utils.Database import db
 from dotenv import load_dotenv
 from os import environ
@@ -52,5 +53,11 @@ def init_app(config):
     app.register_blueprint(GetMovementTypeRoute.main, url_prefix='/')
     app.register_blueprint(DeleteMovementTypeRoute.main, url_prefix='/')
     app.register_blueprint(UpdateMovementTypeRoute.main, url_prefix='/')
+
+    app.register_blueprint(CreateInventoryMovementRoute.main, url_prefix='/')
+    app.register_blueprint(GetInventoryMovementsRoute.main, url_prefix='/')
+    app.register_blueprint(GetInventoryMovementRoute.main, url_prefix='/')
+    app.register_blueprint(UpdateInventoryMovementRoute.main, url_prefix='/')
+    app.register_blueprint(DeleteInventoryMovementRoute.main, url_prefix='/')
 
     return app # Retonarmos la aplicación inicializada
