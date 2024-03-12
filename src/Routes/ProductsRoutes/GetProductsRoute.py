@@ -14,6 +14,7 @@ def get_products():
         # Consultar todos los productos en la base de datos
         products = Product.query.all()
 
+        # Si existe algun registro de productos
         if products:
             # Crear una lista de diccionarios con la información de los productos
             products_list = [{

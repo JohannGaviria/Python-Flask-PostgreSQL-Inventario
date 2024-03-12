@@ -14,6 +14,7 @@ def get_product_categories():
         # Consultar todas las categorias de productos en la base de datos
         product_categories = ProductCategory.query.all()
 
+        # Si existe algun registro de categorias de producto
         if product_categories:
             # Crear una lista de diccionarios con la información de las categorias de los productos
             product_categories_list = [{

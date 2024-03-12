@@ -14,11 +14,16 @@ def get_suppliers():
     try:
         # Consultar todos los proveedores en la base de datos
         suppliers = Supplier.query.all()
-        # Crear una lista de diccionarios con la información de los proveedores
-        suppliers_list = [{'id': supplier.id, 'name': supplier.name, 'address': supplier.address, 'contact': supplier.contact} for supplier in suppliers]
-        
-        # Devolver la lista de proveedores en formato JSON junto con el código de estado 200 (Éxito)
-        return jsonify({'suppliers': suppliers_list}), 200       
+
+        # Si existe algun registro de proovedores
+        if suppliers:
+            # Crear una lista de diccionarios con la información de los proveedores
+            suppliers_list = [{'id': supplier.id, 'name': supplier.name, 'address': supplier.address, 'contact': supplier.contact} for supplier in suppliers]
+            
+            # Devolver la lista de proveedores en formato JSON junto con el código de estado 200 (Éxito)
+            return jsonify({'suppliers': suppliers_list}), 200       
+
+        return jsonify({"message": "Suppliers not founds"}), 404
 
     except Exception as ex:
         # Registrar cualquier excepción ocurrida durante el proceso
