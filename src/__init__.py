@@ -2,6 +2,7 @@ from flask import Flask
 from .Routes.SuppliersRoutes import CreateSupplierRoute, GetSupplierRoute, GetSuppliersRoute, UpdateSupplierRoute, DeleteSupplierRoute
 from .Routes.ProductsRoutes import CreateProductRoute, GetProductRoute, GetProductsRoute, UpdateProductRoute, DeleteProductRoute
 from .Routes.ProductCategoriesRoutes import CreateProductCategorieRoute, GetProductCategoriesRoute, GetProductCategorieRoute, UpdateProductCategorieRoute, DeleteProductCategorieRoute
+from .Routes.MovementTypesRoutes import CreateMovementTypeRoute, GetMovementTypesRoute, GetMovementTypeRoute, DeleteMovementTypeRoute, UpdateMovementTypeRoute
 from .Utils.Database import db
 from dotenv import load_dotenv
 from os import environ
@@ -45,5 +46,11 @@ def init_app(config):
     app.register_blueprint(GetProductCategorieRoute.main, url_prefix='/')
     app.register_blueprint(UpdateProductCategorieRoute.main, url_prefix='/')
     app.register_blueprint(DeleteProductCategorieRoute.main, url_prefix='/')
+
+    app.register_blueprint(CreateMovementTypeRoute.main, url_prefix='/')
+    app.register_blueprint(GetMovementTypesRoute.main, url_prefix='/')
+    app.register_blueprint(GetMovementTypeRoute.main, url_prefix='/')
+    app.register_blueprint(DeleteMovementTypeRoute.main, url_prefix='/')
+    app.register_blueprint(UpdateMovementTypeRoute.main, url_prefix='/')
 
     return app # Retonarmos la aplicación inicializada
